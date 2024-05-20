@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    overflow: hidden;
+}
+.btn1{
+    @apply  bg-green-400 text-green-800;
+}
+.btn2{
+    @apply  bg-red-400  text-red-800 ;
+}
+button{
+    @apply p-1 rounded px-2 text-sm font-bold;
+}
+input{
+    @apply dark:bg-darkmode-2 bg-slate-50 accent-slate-600 dark:border-slate-600 rounded flex items-center border px-1 h-[1.9rem] indent-2 outline-slate-400 dark:outline-slate-600;
+}
+select{
+    @apply rounded bg-slate-50 flex dark:bg-darkmode-2 dark:border-slate-600 border h-[1.9rem] items-center px-2 p-[.5px]  outline-green-400;
+}
+.btn2:hover{
+    @apply text-red-400 bg-red-800
+}
+.btn1:hover{
+    @apply text-green-400 bg-green-800
+}
+label{
+    @apply dark:text-slate-400
+}
+fieldset,hr{
+    @apply dark:bg-darkmode-2 dark:border-slate-600
+}
+
+button{
+    transition-property: background-color color;
+    transition: .5s ease-in-out ;
+}
+
+section{
+    @apply dark:border-slate-600 
+}
+legend{
+    @apply dark:text-slate-200 ml-5 mb-4 font-bold text-lg
+}
+td {
+    white-space: nowrap; /* Prevents text wrapping */
+    text-overflow: ellipsis; /* Displays ellipsis for truncated text */
+  }
+
+@layer base{
+    :root{
+        --bg-color1-dark: #121212;
+        --bg-color2-dark: #1f1b24;
+        --bg-color1-light: #F8FAFC;
+        --bg-color2-light: #F1F5F9;
+        --text-color-dark: #acb2ad;
+        --text-color-light: #3a495e;
+        --current-color: "";
+        --current-row-color:"";
+        --smooth-transition: cubic-bezier(0.99, 1.56, 0.64, 1);
+    }
+}
+.dashboard-nav-button,.dashboard,#sun,#moon{
+    transition-duration: 0.8s;
+    transition-timing-function: cubic-bezier(0.99, 1.56, 0.64, 1); 
+}
+
+.row:nth-child(2n){
+    background-color: var(--current-row-color);
+}
+
+#moon{
+    transition-property: transform opacity display;
+}
+#sun{
+    transition-property: transform opacity display;
+}
+.changeMoon{
+    transform: translateX(10px) rotate(360deg);
+    opacity: 1;
+}
+.changeSun{
+    transform: translateX(50px) rotate(360deg);
+    opacity: 0;
+}
+.dashboard{
+    transition-property: width opacity transform;
+}
+.activeDashboard{
+    transform: translateX(0px);
+    opacity: 1;
+}
+.activeDashboardButton{
+    color: var(--text-color-light);
+    border:1px solid var(--text-color-light);
+    box-shadow: 0px 0px 15px -9px var(--bg-color2-dark);
+}
+.dashboard-nav-button{
+    transition-property: shadow color;
+}
+
+.row{
+    transition-timing-function: ease-in-out;
+    transition-property: width, height;
+    transition-duration: 0.5s;
+}
+
+.popups {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 85vw;
+    height: 90vh;
+    opacity: 0;
+    transform-origin: center center;
+  }
+  .popups-enter {
+    opacity: 0;
+    transform: translate(-50%,-50%), scale(0);
+  }
+  .popups-enter-active {
+    opacity: 1;
+    transform: translate(-50%,-50%), scale(0.9);
+    transition: opacity 500ms var(--smooth-transition), transform 500ms var(--smooth-transition);
+  }
+  .popups-enter-done {
+    opacity: 1;
+    transform: translate(-50%,-50%), scale(1);
+    transition: opacity 500ms var(--smooth-transition), transform 500ms var(--smooth-transition);
+  }
+  .popups-exit {
+    opacity: 1;
+    transform: translate(-50%,-50%), scale(1);
+  }
+  .popups-exit-active {
+    opacity: 0;
+    transform: translate(-50%,-50%), scale(1);
+    
+  }
+  .popups-exit-done{
+    opacity: 0;
+    transform: translate(-50%,-50%), scale(0);
+  }
