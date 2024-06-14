@@ -4,7 +4,9 @@ const GeneralStateContext = createContext({})
 
 const GeneralStateProvider = ({children}) => {
   const [dialogue,setDialogue] = useState()
-
+  const occupation_by_sector = {
+    
+  }
   const [currentLoanCustomer,setCurrentLoanCustomer] = useState({})
   return (
     <GeneralStateContext.Provider value={{currentLoanCustomer,setCurrentLoanCustomer}}>{children}</GeneralStateContext.Provider>

@@ -12,6 +12,10 @@ export default {
         lightmode: {
           1: 'var(--bg-color1-light)',
           2: 'var(--bg-color2-light)'
+        },
+        buttons:{
+          submit:"",
+          cancel: ""
         }
       },
       color: {

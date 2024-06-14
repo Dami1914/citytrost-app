@@ -5,14 +5,14 @@
 body{
     overflow: hidden;
 }
-.btn1{
+.btn0{
     @apply  bg-green-400 text-green-800;
 }
-.btn2{
+.btn1{
     @apply  bg-red-400  text-red-800 ;
 }
 button{
-    @apply p-1 rounded px-2 text-sm font-bold;
+    @apply p-1 rounded px-6 text-sm font-bold;
 }
 input{
     @apply dark:bg-darkmode-2 bg-slate-50 accent-slate-600 dark:border-slate-600 rounded flex items-center border px-1 h-[1.9rem] indent-2 outline-slate-400 dark:outline-slate-600;
@@ -20,10 +20,10 @@ input{
 select{
     @apply rounded bg-slate-50 flex dark:bg-darkmode-2 dark:border-slate-600 border h-[1.9rem] items-center px-2 p-[.5px]  outline-green-400;
 }
-.btn2:hover{
+.btn1:hover{
     @apply text-red-400 bg-red-800
 }
-.btn1:hover{
+.btn0:hover{
     @apply text-green-400 bg-green-800
 }
 label{
@@ -56,6 +56,8 @@ td {
         --bg-color1-light: #F8FAFC;
         --bg-color2-light: #F1F5F9;
         --text-color-dark: #acb2ad;
+        --button-submit:rgb(74 222 128,1),
+        --button-cancel: rgb(153 27 27/1),
         --text-color-light: #3a495e;
         --current-color: "";
         --current-row-color:"";

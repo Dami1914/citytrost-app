@@ -10,17 +10,33 @@ console.log('preload loaded')
 const api = {
   async toggleTheme() {
     try {
-      const newTheme = await ipcRenderer.invoke('toggle-theme');
+      const newTheme = await ipcRenderer.invoke('toggle-theme')
       // Update UI based on the received newTheme value
-      console.log(`New theme: ${newTheme}`);
-      return newTheme; // Optionally return the theme for further processing
+      console.log(`New theme: ${newTheme}`)
+      return newTheme // Optionally return the theme for further processing
     } catch (error) {
-      console.error('Error toggling theme:', error);
+      console.error('Error toggling theme:', error)
       // Handle errors appropriately, e.g., display a user-friendly message
     }
+  },
+  async createSavingsAccount(data) {
+    try {
+      const datas = await ipcRenderer.invoke('create-savings', data)
+      console.log(datas)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getData(collectionName) {
+    try {
+      const data = await ipcRenderer.invoke('get-data', collectionName);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   }
-};
-
+}
 
 if (process.contextIsolated) {
   try {

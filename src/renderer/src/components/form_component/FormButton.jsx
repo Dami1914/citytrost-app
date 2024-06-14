@@ -1,16 +1,19 @@
 import React from 'react'
 
-const FormButton = ({buttons}) => {
-    const style = {
-        backgroundColor: 
-    }
+const FormButton = ({ buttons }) => {
   return (
-    <div className='w-full flex items-center justify-around'>
-        {
-            buttons.map((ele)=>{
-                return <button style={{backgroundColor: ele=== }} type="button">{ele}</button>
-            })
-        }
+    <div className="w-full flex mb-10  justify-end gap-5">
+      {buttons.map((ele, index) => {
+        return (
+          <button
+            className={`btn${index}`}
+            key={index + 'button'}
+            type="submit"
+          >
+            {ele}
+          </button>
+        )
+      })}
     </div>
   )
 }

@@ -5,7 +5,7 @@ import('electron-store')
     const Store = module.default; // Access the default export of the module
     preferenceSettings = new Store({
       default: {
-        theme: false
+        theme: true
       }
     });
   })

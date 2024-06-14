@@ -43,7 +43,7 @@ const PerfomanceTable = () => {
   ]
 
   return (
-    <div ref={perfomanceRef} id="performanceTable" className="hover:drop-shadow-lg w-full  dark:bg-darkmode-1 h-full  bg-white p-4 dark:border-slate-600 border rounded-xl">
+    <div ref={perfomanceRef} id="performanceTable" className="hover:drop-shadow-lg w-full  dark:bg-darkmode-1   bg-white p-4 dark:border-slate-600 border rounded-xl">
         <div className="flex w-full border-b dark:text-slate-500 dark:border-b-slate-600 p-2 font-bold dark:text-darkmode-dark text-slate-700">
           <div className="w-[20%]">Perfomance Table</div>
           <div className='w-[60%] flex gap-10'>

@@ -3,7 +3,7 @@ import { createContext,useContext, useState } from 'react'
 const LayoutDesignContext = createContext({})
 
 const LayoutDesignProvider = ({ children }) => {
-  const [mode, setMode] = useState(window.api.toggleTheme().then((ele) => ele))
+  const [mode, setMode] = useState(true)
   const dark = '#2b2b2b'
   const semiDark = '#3c3c3c'
   const light = 'rgba(248,250,252,1)'
@@ -11,7 +11,7 @@ const LayoutDesignProvider = ({ children }) => {
 
   async function handleModeChange() {
     const theme = await window.api.toggleTheme()
-    setMode(theme)
+    setMode(mode)
   }
 
   function handleExpand(element, setState, state) {

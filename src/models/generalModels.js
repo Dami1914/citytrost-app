@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
 import { errorConsole, infoConsole } from '../utils/logger'
 import {
-  addressFieldSchemaValidator,
-  numberFieldSchemaSetup,
-  nameFieldSchemaSetup
+  nameFieldSchemaSetup,
+  otherInfo,
+  addressInfo,
+  bankInfo
 } from '../utils/schemaSetupFunction.js'
 
 async function mongooseConnect(...arg) {
@@ -18,54 +19,20 @@ async function mongooseConnect(...arg) {
   }
 }
 
+
+
 const customerSchema = new mongoose.Schema({
-  // Use Mongoose's default ObjectIds for customer ID
-  _id: mongoose.Schema.Types.ObjectId,
   names: nameFieldSchemaSetup(),
-  age: Number,
-  gender: { type: String, enum: ['Male', 'Female'] },
-  marital_status: { type: String, enum: ['Married', 'Single', 'Divorced'] },
-  imageUrl: { String },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: {
-      validator: function (value) {
-        // Custom validation logic for email format
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-      },
-      message: 'Invalid email format'
-    }
-  },
-  state_of_origin: String,
-  other_Info:{
-
-  },
-
-  phones: [numberFieldSchemaSetup(11)],
-  next_of_kin: {
+  address_Info: addressInfo(mongoose),
+  other_Info: otherInfo(mongoose),
+  account_Info: bankInfo(),
+  nok: {
     names: nameFieldSchemaSetup(),
-    phone: [numberFieldSchemaSetup(11)],
-    age: Number,
-    gender: { type: String, enum: ['Male', 'Female'] },
-    marital_status: { type: String, enum: ['Married', 'Single', 'Divorced'] },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      validate: {
-        validator: function (value) {
-          // Custom validation logic for email format
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-        },
-        message: 'Invalid email format'
-      }
-    },
-    imageUrl: { String },
+    address_Info: addressInfo(mongoose),
+    other_Info: otherInfo(mongoose),
+    account_Info: bankInfo(),
     relationship: {
       type: String,
-      required: true,
       enum: [
         'Brother',
         'Sister',
@@ -80,22 +47,14 @@ const customerSchema = new mongoose.Schema({
         'Friend',
         'Nephew'
       ]
-    },
-    address: addressFieldSchemaValidator()
+    }
   },
-  account_officerId: [
+  accounts: [
     {
-      type: mongoose.Schema.Types.ObjectId // Use ObjectIds for account officer IDs (optional)
+      type: mongoose.Schema.Types.ObjectId,
+      ref: ''
     }
   ],
-  bank_info: {
-    bank_name: nameFieldSchemaSetup(),
-    account_name: nameFieldSchemaSetup(),
-    account_number: numberFieldSchemaSetup(10),
-    bvn: numberFieldSchemaSetup(11)
-  },
-  office_address: addressFieldSchemaValidator(),
-  address: addressFieldSchemaValidator(),
   loans: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -108,18 +67,16 @@ const customerSchema = new mongoose.Schema({
 
 const loanSchema = new mongoose.Schema({
   // Use Mongoose's default ObjectIds for loan ID
-  _id: mongoose.Schema.Types.ObjectId,
   customer_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Customer',
-    required: true
+    ref: 'Customer'
   },
-  amount: Number,
-  interest_rate: Number,
-  term_months: Number,
-  start_date: Date,
-  end_date: Date,
-  status: { type: String, enum: ['pending', 'active', 'closed'] },
+  amount: { type: Number },
+  interest_rate: { type: Number },
+  term_months: { type: Number },
+  start_date: { type: Date },
+  end_date: { type: Date },
+  status: { type: String, enum: ['Pending', 'Active', 'Closed', 'Restructured'] },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 })
@@ -132,7 +89,7 @@ const paymentSchema = new mongoose.Schema({
     ref: 'Loan'
   },
   customer_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Customer'
   },
   amount: Number,

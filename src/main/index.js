@@ -7,8 +7,9 @@ import mongoose from 'mongoose'
 import { errorConsole, infoConsole } from '../utils/logger'
 import { mongooseConnect, Loan, Customer } from '../models/generalModels'
 
-mongooseConnect('mongodb://127.0.0.1:27017/citytrost')
 
+mongooseConnect('mongodb://127.0.0.1:27017/citytrost')
+ 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -70,6 +71,27 @@ app.whenReady().then(() => {
     } catch (error) {
       console.error(error)
       throw new Error("couldn't create customer successfully")
+    }
+  })
+
+  ipcMain.handle('create-savings', async (event, data) => {
+    console.log(data)
+    try {
+      const newCustomer = new Customer(data)
+      const savedCustomer = await newCustomer.save()
+      event.sender.send('saved-successfully', savedCustomer)
+      console.log(data)
+    } catch (error) {
+      console.error(error, 'unable to save data')
+    }
+  })
+  ipcMain.handle('get-data', async (event, collectionName) => {
+    try {
+      const data = await mongoose.connection.db.collection(collectionName).find({}).toArray()
+      console.log(data)
+      return data
+    } catch (error) {
+      console.error('unable to get data from database', error)
     }
   })
   // IPC test

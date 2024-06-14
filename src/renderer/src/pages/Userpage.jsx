@@ -36,7 +36,7 @@ const Userpage = () => {
             {location.pathname.split('/').includes('dashboard') ? (
               ''
             ) : (
-              <div className="h-[10%]">
+              <div className="h-[10%] flex-shrink-0">
                 <MiniTopMenu />
               </div>
             )}
