@@ -35,8 +35,8 @@ function nameFieldSchemaSetup() {
   }
 }
 
-function validateNumberLength(value, len, types) {
-  if (types === 'contact') {
+function validateNumberLength(value, len) {
+  if (Array.isArray(value)) {
     return value.some((numbers) => numbers.length !== len)
   } else {
     return value.length !== len

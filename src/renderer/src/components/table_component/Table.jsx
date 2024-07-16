@@ -6,7 +6,7 @@ import TableRow from './TableRow'
 const Table = ({ tableData, operation, PopUpComponent, popUpTypePath }) => {
   const [popUp, setPopUp] = useState(true)
   const rowRefs = useRef([])
-
+  console.log("this is the werey empty array",tableData)
   return (
     <div className="w-full">
       <div className="w-full bg-white  dark:bg-darkmode-2  h-[40%]">
@@ -14,8 +14,8 @@ const Table = ({ tableData, operation, PopUpComponent, popUpTypePath }) => {
           <input type="search" className="w-2/3" placeholder="Search ID and Name" />
         </form>
       </div>
-      {!tableData ? (
-        ''
+      {tableData.length === 0 ? (
+        ""
       ) : (
         <table className="w-full overflow-scroll  dark:bg-darkmode-2 dark:border-0 dark:text-darkmode-dark  text-slate-600 text-sm">
           <thead className="border-b dark:bg-darkmode-1 bg-white dark:border-b-slate-600 dark:border-darkmode-1">
@@ -25,7 +25,7 @@ const Table = ({ tableData, operation, PopUpComponent, popUpTypePath }) => {
             </tr>
           </thead>
           <tbody className="">
-            {tableData.map((ele, index) => {
+            {tableData?.map((ele, index) => {
               return (
                 <TableRow
                   operation={operation}

@@ -10,8 +10,8 @@ const LayoutDesignProvider = ({ children }) => {
   const semiLight = 'rgb(241 245 249 / 1)'
 
   async function handleModeChange() {
-    const theme = await window.api.toggleTheme()
-    setMode(mode)
+    //const theme = await window.api.toggleTheme()
+    //setMode(mode)
   }
 
   function handleExpand(element, setState, state) {

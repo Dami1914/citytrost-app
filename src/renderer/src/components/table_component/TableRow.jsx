@@ -97,10 +97,10 @@ const TableRow = ({ elem, operation, rowRefs, popUpTypePath, index }) => {
             ) : (
               <td
                 ref={(td) => (rowRef.current[index] = td)} // Correctly assign ref
-                className="text-center p-2"
+                className="text-center p-2 relative overflow-hidden"
                 key={index}
               >
-                {ele.length > 19 ? ele.slice(0, 13).concat('....') : ele}
+                {ele}
               </td>
             )
           )}
